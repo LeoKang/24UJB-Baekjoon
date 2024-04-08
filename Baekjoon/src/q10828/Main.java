@@ -1,7 +1,9 @@
 package q10828;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
 //import java.util.Stack;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 class SJStack {
 	int[] ar;
@@ -42,19 +44,36 @@ class SJStack {
 }
 
 public class Main {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+	public static void main(String[] args) throws Exception {
+//		Scanner sc = new Scanner(System.in);
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
 //		Stack<Integer> stk = new Stack<Integer>();
 		SJStack stk = new SJStack();
 
-		int N = sc.nextInt();
+//		int N = sc.nextInt();
+		int N = Integer.parseInt(br.readLine());
 		for (int i = 0; i < N; i++) {
-			String cmd = sc.next();
+//			String cmd = sc.next();
+			String cmd = br.readLine();
+			// "push 3"
+			// "pop"
+
+			StringTokenizer st = new StringTokenizer(cmd);
+			int value = 0;
+			if (st.countTokens() == 2) {
+				String cmd2 = st.nextToken();
+				value = Integer.parseInt(st.nextToken());
+				cmd = cmd2;
+			} else {
+				cmd = st.nextToken();
+			}
 
 			switch (cmd) {
 			case "push":
-				int param = sc.nextInt();
-				stk.push(param);
+//				int param = sc.nextInt();
+//				stk.push(param);
+				stk.push(value);
 				break;
 			case "pop":
 				if (stk.size() == 0) {
@@ -83,6 +102,6 @@ public class Main {
 				break;
 			}
 		}
-		sc.close();
+//		sc.close();
 	}
 }
