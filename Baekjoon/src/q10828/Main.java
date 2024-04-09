@@ -1,83 +1,52 @@
 package q10828;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
 	public static void main(String[] args) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		SJStack stk;
+		Stack<Integer> stk = new Stack<Integer>();
+		StringTokenizer st;
+		int N = 0;
 		try {
-			String line = br.readLine();
-			int cnt = Integer.parseInt(line);
-			stk = new SJStack(cnt);
-			for (int i = 0; i < cnt; i++) {
-				line = br.readLine();
-				StringTokenizer st = new StringTokenizer(line);
-				String cmd = st.nextToken();
-//				System.out.println(cmd);
-
-				if (cmd.equals("push")) {
-					String cmd2 = st.nextToken();
-//					System.out.println(cmd2);
-					int p = Integer.parseInt(cmd2);
-					stk.push(p);
-				} else if (cmd.equals("pop")) {
-					stk.pop();
-				} else if (cmd.equals("top")) {
-					stk.top();
-				} else if (cmd.equals("size")) {
-					stk.size();
-				} else if (cmd.equals("empty")) {
-					stk.empty();
+			N = Integer.parseInt(br.readLine());
+			for (int i = 0; i < N; i++) {
+				st = new StringTokenizer(br.readLine());
+				String token = st.nextToken();
+				switch (token) {
+				case "push":
+					String token2 = st.nextToken();
+					stk.push(Integer.parseInt(token2));
+					break;
+				case "pop":
+					if (stk.isEmpty()) {
+						System.out.println("-1");
+					} else {
+						System.out.println(stk.pop());
+					}
+					break;
+				case "top":
+					if (stk.isEmpty()) {
+						System.out.println("-1");
+					} else {
+						System.out.println(stk.peek());
+					}
+					break;
+				case "size":
+					System.out.println(stk.size());
+					break;
+				case "empty":
+					if (stk.isEmpty()) {
+						System.out.println("1");
+					} else {
+						System.out.println("0");
+					}
+					break;
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-	}
-}
-
-class SJStack {
-	private int ar[];
-	private int top;
-
-	public SJStack(int size) {
-		ar = new int[size];
-		top = -1;
-	}
-
-	public void push(int X) {
-		ar[++top] = X;
-	}
-
-	public void pop() {
-		if (top == -1) {
-			System.out.println(top);
-		} else {
-			System.out.println(ar[top--]);
-		}
-	}
-
-	public void size() {
-		System.out.println(top + 1);
-	}
-
-	public void empty() {
-		if (top == -1) {
-			System.out.println("1");
-		} else {
-			System.out.println("0");
-		}
-	}
-
-	public void top() {
-		if (top == -1) {
-			System.out.println(top);
-		} else {
-			System.out.println(ar[top]);
 		}
 	}
 }
